@@ -10,7 +10,7 @@
 
 [1 » Windows & Office Activation](#1--windows--office-activation)
 
-[2 » Apple USB Drivers](2--apple-usb-drivers)
+[2 » Apple USB Drivers](#2--apple-usb-drivers)
 
 <hr>
 
