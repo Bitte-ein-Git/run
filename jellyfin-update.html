@@ -1,0 +1,64 @@
+# This script is hosted on <b>https://win.heyfordy.de/jellyfin-update.html</b> GitHub: <b>https://github.com/Bitte-ein-Git/win-collection</b><hr><pre>
+
+# Admin-Check
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    exit
+}
+
+# Create Scheduled Task
+$taskName = "Update-Jellyfin"
+$taskExists = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
+
+if (-not $taskExists) {
+    Write-Host "Creating Scheduled Task '$taskName' ..."
+    
+    $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`""
+    $trigger = New-ScheduledTaskTrigger -Daily -At 2:00AM
+    $principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
+
+    Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal
+
+    Write-Host "Scheduled Task created. Default trigger: daily at 2am"
+}
+
+# ACTUAL UPDATE LOGIC STARTS HERE - Thanks to https://github.com/realies
+Push-Location $PSScriptRoot
+$releasesUrl = "https://api.github.com/repos/jellyfin/jellyfin/releases"
+$installationPath = "$env:APPDATA\jellyfin"
+$architecture = (Get-WmiObject Win32_OperatingSystem).OSArchitecture.replace("-bit", "")
+$serviceName = "Jellyfin"
+$service = Get-Service $serviceName -ErrorAction SilentlyContinue
+
+if (!$service) {
+    Write-Host "$serviceName service not found, exiting..."
+    exit 1
+} else {
+    $currentVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$installationPath\jellyfin.dll").FileVersion
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    $releases = Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing | ConvertFrom-Json
+    $latestVersion = $releases[0].tag_name.Replace("v", "")
+    if ($currentVersion -eq $latestVersion) {
+        Write-Host "Up to date, exiting..."
+        exit 0
+    }
+    Write-Host "Updating Jellyfin from $currentVersion to $latestVersion..."
+    $latestVersionUrl = $($releases[0].assets | Where-Object { $_.browser_download_url -like "*$latestVersion*$architecture.zip" } | Select-Object -ExpandProperty browser_download_url)
+    $fileName = "jellyfin-latest.zip"
+    Write-Host "Downloading latest package..."
+    Invoke-WebRequest $latestVersionUrl -OutFile $fileName
+    if ($service.Status -eq "Running") {
+        Write-Host "Stopping $serviceName service..."
+        Stop-Service $serviceName -Force
+    }
+    Write-Host "Preparing to update..."
+    Get-ChildItem $installationPath -Exclude cache, config, data, logs, root | Remove-Item -Recurse -Force
+    Write-Host "Unpacking..."
+    Expand-Archive $fileName $installationPath -Force
+    Write-Host "Cleaning up..."
+    Remove-Item $fileName -Force
+    Write-Host "Starting $serviceName service..."
+    Start-Service $serviceName
+    Write-Host "Done"
+    exit 0
+}

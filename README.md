@@ -1,8 +1,7 @@
-<p align="center"><img src="https://massgrave.dev/img/logo_small.png" alt="MAS Logo"></p>
+<p align="center"><img src="img/win.heyfordy.de.png" alt="MAS Logo"></p>
 
-<h1 align="center">Microsoft  Activation  Scripts (MAS)</h1>
-
-<h3 align="center">My collection of open-source Windows and Office activator scripts and other useful powershell stuff.</h3>
+---
+<h3 align="center">My collection of scripts and tools for automating boring stuff, Windows/Office activation, system maintenance and other tasks — all open-source.</h3>
 
 ---
 
@@ -10,7 +9,9 @@
 
 [1 » Windows & Office Activation](#1--windows--office-activation)
 
-[2 » Apple USB Drivers](#2--apple-usb-drivers)
+[2 » Jellyfin Server Auto-Updater](#2--jellyfin-auto-updater)
+
+[3 » Apple USB Drivers](#3--apple-usb-drivers)
 
 <hr>
 
@@ -35,7 +36,22 @@ irm https://get.activated.win | iex
 
 ---
 
-## 2 » Apple USB Drivers
+## 2 » Jellyfin Auto-Updater
+> Automatically checks for the latest releases and installs updates daily via Windows Task Scheduler.
+### How to install ?
+
+1.   **Open PowerShell**  
+	To do that, press the Windows key + X, then select PowerShell or Terminal.
+
+2.   **Copy and paste the code below, then press enter.**  
+```
+irm https://win.heyfordy.de/jellyfin-update | iex
+```
+3.   That's it!
+
+---
+
+## 3 » Apple USB Drivers
 ### How to install the Apple USB drivers?
 
 1.   **Open PowerShell**  
