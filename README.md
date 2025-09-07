@@ -1,4 +1,4 @@
-<p align="center"><img src="img/win.heyfordy.de.png" alt="MAS Logo"></p>
+<p align="center"><img src="img/win.heyfordy.de.png" alt="Logo" style="max-width: 50%;"></p>
 
 ---
 <h3 align="center">My collection of scripts and tools for automating boring stuff.</h3>
@@ -10,7 +10,10 @@
 
 [1 » Windows & Office Activation](#1--windows--office-activation)
 
-[2 » Proxmox-VE Post Installation](#2--proxmox-ve-post-installation)
+[2. » Proxmox-VE:](#2--proxmox)
+- [» **1** — Post Install Script](#21--proxmox-ve-post-installation)
+- [» **2** — Docker Installation](#22--proxmox-ve-docker)
+- [» **3** — Home Assistant CT Installation](#23--proxmox-ve-home-assistant)
 <!-- [2 » Jellyfin Server Auto-Updater](#2--jellyfin-auto-updater) -->
 
 [3 » Apple USB Drivers](#3--apple-usb-drivers)
@@ -37,8 +40,8 @@ irm https://get.activated.win | iex
 4.   That's all
 
 ---
-
-## 2 » Proxmox-VE Post Installation
+# 2 » Proxmox
+## 2.1 » Proxmox-VE Post Installation
 > This script is intended for managing or enhancing the PVE host system directly.
 ### How to install ?
 
@@ -51,6 +54,40 @@ bash -c "$(curl -fsSL https://win.heyfordy.de/pve)"
 ```
 3.   That's it!
 
+---
+
+## 2.2 » Proxmox-VE Docker
+> This script installs docker to proxmox.
+### How to install ?
+
+1.   **Open Host Shell**  
+	To do that, open your PVE Webinterface, select your node and open the shell.
+
+2.   **Copy and paste the code below, then press enter.**  
+```
+bash -c "$(curl -fsSL https://win.heyfordy.de/pved)"
+```
+3.   That's it!
+
+---
+
+## 2.3 » Proxmox-VE Home Assistant
+> This script installs Home Assistant & Portainer to proxmox.
+### How to install ?
+
+1.   **Open Host Shell**  
+	To do that, open your PVE Webinterface, select your node and open the shell.
+
+2.   **Copy and paste the code below, then press enter.**  
+```
+bash -c "$(curl -fsSL https://win.heyfordy.de/pveha)"
+```
+3.   That's it!
+
+>	›› Config File will be available at:
+```
+/var/lib/docker/volumes/hass_config/_data
+```
 ---
 <!--
 ## 2 » Jellyfin Auto-Updater
