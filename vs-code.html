@@ -1,0 +1,16 @@
+# This script is hosted on <b>https://run.heyfordy.de/</b> GitHub: <b>https://github.com/Bitte-ein-Git/run</b><hr><pre>
+
+# Set correct output encoding for special characters
+$OutputEncoding = [System.Text.Encoding]::UTF8
+
+# URL to the main interactive script
+$url = "https://run.heyfordy.de/scripts/vs-code/installer.ps1"
+
+# Define a temporary path for the script
+$tempFile = Join-Path $env:TEMP "installer.ps1"
+
+# Download the main script
+Invoke-RestMethod -Uri $url -OutFile $tempFile
+
+# Start the main script in a new, interactive PowerShell window
+Start-Process powershell.exe -ArgumentList "-ExecutionPolicy Bypass -File `"$tempFile`""

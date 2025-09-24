@@ -1,22 +1,36 @@
-<p align="center"><img src="img/win.heyfordy.de.png" alt="Logo" style="max-width: 50%;"></p>
+<div  align="center">
+<p><img src="img/run.heyfordy.de.png" alt="Logo" style="max-width: 25%;"></p>
 
 ---
-<h3 align="center">My collection of scripts and tools for automating boring stuff.</h3>
+<h3>My collection of scripts and tools for automating boring stuff.</h3>
 <!-- Windows/Office activation, system maintenance and other tasks — all open-source. -->
 
 ---
+</div>
 
-**<p>Jump to topic:</p>**
+<details>
+  <summary>
+      <h3 style="color: orange; border-bottom: 0; display: inline-block;">
+      <b><u>📋 Jump to topic:</u></b>
+      </h3></summary>
 
 [1 » Windows & Office Activation](#1--windows--office-activation)
 
 [2. » Proxmox-VE:](#2--proxmox)
+<details open>
+
 - [» **1** — Post Install Script](#21--proxmox-ve-post-installation)
 - [» **2** — Docker Installation](#22--proxmox-ve-docker)
 - [» **3** — Home Assistant CT Installation](#23--proxmox-ve-home-assistant)
+</details>
 <!-- [2 » Jellyfin Server Auto-Updater](#2--jellyfin-auto-updater) -->
 
-[3 » Apple USB Drivers](#3--apple-usb-drivers)
+[3 » SpotX - Spotify Adfree](#3--spotx---spotify-adfree)
+
+[4 » Apple USB Drivers](#4--apple-usb-drivers)
+
+[5 » VS Code Installer](#5--vs-code-installer)
+</details>
 
 <hr>
 
@@ -28,11 +42,11 @@
 
 2.   **Copy and paste the code below, then press enter.**  
 ```
-irm https://win.heyfordy.de | iex
+irm https://run.heyfordy.de | iex
 ```
 Alternatively, you can use the following (this will be deprecated in the future):  
 ```
-irm https://get.activated.win | iex
+irm https://win.heyfordy.de/activate | iex
 ```
 
 3.   You will see the activation options. Choose the activation options highlighted in green. 
@@ -50,7 +64,7 @@ irm https://get.activated.win | iex
 
 2.   **Copy and paste the code below, then press enter.**  
 ```
-bash -c "$(curl -fsSL https://win.heyfordy.de/pve)"
+bash -c "$(curl -fsSL https://run.heyfordy.de/pve)"
 ```
 3.   That's it!
 
@@ -65,7 +79,7 @@ bash -c "$(curl -fsSL https://win.heyfordy.de/pve)"
 
 2.   **Copy and paste the code below, then press enter.**  
 ```
-bash -c "$(curl -fsSL https://win.heyfordy.de/pved)"
+bash -c "$(curl -fsSL https://run.heyfordy.de/pved)"
 ```
 3.   That's it!
 
@@ -80,7 +94,7 @@ bash -c "$(curl -fsSL https://win.heyfordy.de/pved)"
 
 2.   **Copy and paste the code below, then press enter.**  
 ```
-bash -c "$(curl -fsSL https://win.heyfordy.de/pveha)"
+bash -c "$(curl -fsSL https://run.heyfordy.de/pveha)"
 ```
 3.   That's it!
 
@@ -99,13 +113,27 @@ bash -c "$(curl -fsSL https://win.heyfordy.de/pveha)"
 
 2.   **Copy and paste the code below, then press enter.**  
 ```
-irm https://win.heyfordy.de/jellyfin-update | iex
+irm https://run.heyfordy.de/jellyfin-update | iex
 ```
 3.   That's it!
 
 ---
 -->
-## 3 » Apple USB Drivers
+## 3 » SpotX - Spotify Adfree
+### How to install SpotX?
+
+1.   **Open PowerShell**  
+	To do that, press the Windows key + X, then select PowerShell or Terminal.
+
+2.   **Copy and paste the code below, then press enter.**  
+```
+iex "& { $(iwr -useb 'https://run.heyfordy.de/spotx') } -new_theme -block_update_on"
+```
+3.   That's all
+
+---
+
+## 4 » Apple USB Drivers
 ### How to install the Apple USB drivers?
 
 1.   **Open PowerShell**  
@@ -113,7 +141,23 @@ irm https://win.heyfordy.de/jellyfin-update | iex
 
 2.   **Copy and paste the code below, then press enter.**  
 ```
-irm https://win.heyfordy.de/apple | iex
+irm https://run.heyfordy.de/apple | iex
+```
+3.   That's all
+
+---
+
+---
+
+## 5 » VS Code Installer
+### How to install Visual Studio Code?
+
+1.   **Open PowerShell**  
+	To do that, press the Windows key + X, then select PowerShell or Terminal.
+
+2.   **Copy and paste the code below, then press enter.**  
+```
+irm https://run.heyfordy.de/vs-code | iex
 ```
 3.   That's all
 
